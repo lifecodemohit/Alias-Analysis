@@ -1,0 +1,14 @@
+p, a, q, r
+startGraph
+B1: 
+endGraph
+B1
+startBlock
+B1
+p = &a
+p = q
+p = *r
+*p = &a
+*p = q
+*p = *r
+endBlock

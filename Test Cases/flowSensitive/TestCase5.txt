@@ -1,0 +1,19 @@
+a, b, e, d, i, c, cptr, t
+startGraph
+B1: B2, B3
+B2: B3, B2
+B3:
+endGraph
+B1
+startBlock
+B1
+a = &e
+endBlock
+startBlock
+B2
+cptr = &c
+endBlock
+startBlock
+B3
+t = *cptr
+endBlock

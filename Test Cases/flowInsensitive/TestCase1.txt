@@ -1,0 +1,6 @@
+x, y, r, s, p, q
+r = &x
+s = &y
+p = &r
+q = &s
+*p = &y

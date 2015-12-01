@@ -1,0 +1,25 @@
+x, y, r, s, p, q
+startGraph
+B1: B2, B3
+B2: B4
+B3: B4
+B4: 
+endGraph
+B1
+startBlock
+B1
+endBlock
+startBlock
+B2
+r = &x
+s = &y
+p = &r
+endBlock
+startBlock
+B3
+q = &s
+*p = &y
+endBlock
+startBlock
+B4
+endBlock

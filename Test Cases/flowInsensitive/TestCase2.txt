@@ -1,0 +1,9 @@
+a, b, c, d, e, f, x, y, z
+x = &b
+x = &a
+a = x
+*a = &c
+x = &d
+x = &b
+a = x
+*a = &e

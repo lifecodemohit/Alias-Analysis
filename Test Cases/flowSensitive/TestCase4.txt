@@ -1,0 +1,9 @@
+ptr, a
+startGraph
+B1:
+endGraph
+B1
+startBlock
+B1
+ptr = &a
+endBlock
