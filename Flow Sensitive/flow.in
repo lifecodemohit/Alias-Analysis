@@ -1,0 +1,15 @@
+2
+0
+
+1
+0 
+1
+1 
+0
+5
+int k = 89;
+s = &k
+var = &s
+ptr = &var
+pptr = *ptr
+0

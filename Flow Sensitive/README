@@ -1,0 +1,11 @@
+README :
+
+Commands :
+1. clang -cc1 -analyze -analyzer-checker=debug.DumpCFG <cpp-file>
+2. Save result in text file.
+3. clang -cc1 -analyze -analyzer-checker=debug.ViewCFG <cpp-file>
+4. dot -Tpdf <***.dot> -o <Graph***.pdf>
+5. g++ CFG_Gen.cpp
+6. ./a.out < output_file > flow_input_file 
+7. g++ FlowSensitive.cpp
+8. ./a.out < flow_input_file
