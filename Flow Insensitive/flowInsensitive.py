@@ -6,14 +6,18 @@ def sortMine(filename):
 	newFile.write(pointFile.readline())
 	toSort = []
 	for line in pointFile:
+		toSort.append(line.strip())
+	newToSort = []
+	toSort = list(set(toSort))
+	for line in toSort:
 		sanitized = line.strip().split("= ")
 		leftOp = sanitized[0].strip()
 		rightOp = sanitized[1].strip()
 		countLevelLeft = leftOp.count('*')
 		countLevelRight = rightOp.count('*') - rightOp.count('&')
-		toSort.append((line.strip(),countLevelLeft,countLevelRight))
+		newToSort.append((line.strip(),countLevelLeft,countLevelRight))
 
-	for newOrder in sorted(toSort, key = lambda x : (x[1], x[2])):
+	for newOrder in sorted(newToSort, key = lambda x : (x[1], x[2])):
 		newFile.write(newOrder[0]+"\n")
 
 	pointFile.close()
@@ -39,27 +43,27 @@ def analyze(ops, points_to, constrained):
 	# print toWorkWith
 	if countLevelRight < 0:
 		for child in toWorkWith:
-			points_to[child] += rightOp
+			if rightOp not in points_to[child]: points_to[child] += rightOp
 			for temp in constrained[child]:
-				points_to[temp] += rightOp
+				if rightOp not in points_to[temp]: points_to[temp] += rightOp
 		return True
 
 	if countLevelLeft == 0 and countLevelRight == 0:
 		for child in toWorkWith:
 			for rStart in points_to[rightOp]:
-				points_to[child] += rStart
+				if rStart not in points_to[child]: points_to[child] += rStart
 				for temp in constrained[child]:
-					points_to[temp] += rStart
-			constrained[rightOp] += child
+					if rStart not in points_to[temp]: points_to[temp] += rStart
+			if child not in constrained[rightOp]: constrained[rightOp] += child
 		return True
 	else:
 		for child in toWorkWith:
 			for rStart in findLayer(points_to, countLevelRight+1, rightOp):
-				points_to[child] += rStart
+				if rStart not in points_to[child]: points_to[child] += rStart
 				for temp in constrained[child]:
-					points_to[temp] += rStart
+					if rStart not in points_to[temp]: points_to[temp] += rStart
 			for rStart in findLayer(points_to, countLevelRight, rightOp):
-				constrained[rStart] += child
+				if child not in constrained[rStart]: constrained[rStart] += child
 		return True
 
 def writeToGV(points_to):
@@ -77,7 +81,7 @@ def genAliasPairs(points_to):
 	for parent in points_to.keys():
 		for child in points_to[parent]:
 			print "(*"+parent+","+child+")",
-		print
+		if len(points_to[parent]): print
 
 def main():
 	try:
